@@ -10,8 +10,8 @@ import {
 
 import Form from "./components/Form/Form";
 import Posts from "./components/Posts/Posts";
-import memories from "./images/memories.png";
 
+import memories from "./images/memories.png";
 import useStyles from "./styles";
 
 const App = () => {
