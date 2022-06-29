@@ -7,12 +7,12 @@ import postRoutes from './routes/posts.js'
 
 const app = express();
 
-app.use('/posts', postRoutes); // prefix 'posts'
-//http://localhost:5000/posts
 
 app.use(bodyParser.json({ limits: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limits: "30mb", extended: true }));
 app.use(cors());
+
+app.use('/posts', postRoutes); // prefix 'posts'
 
 // const pwd = process.env.MONGODB_PASSWORD;
 // https://www.mongodb.com/cloud/atlas
