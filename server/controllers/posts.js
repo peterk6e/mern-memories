@@ -61,13 +61,13 @@ export const likePost = async (req, res) => {
     res.status(404).send("No post with that ID")
 
   try {
-    const post = PostMessage.findById(id)
+    const post = await PostMessage.findById(id)
     const updatedPost = await PostMessage.findByIdAndUpdate(
       id,
       { likeCount: post.likeCount + 1 },
       { new: true }
-    )
-    return res.json(updatedPost)
+      )
+    res.json(updatedPost)
   } catch (error) {
     console.log(error)
   }
