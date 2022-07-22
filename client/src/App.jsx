@@ -1,52 +1,51 @@
-import React, { useState, useEffect } from "react";
-import { AppBar, Typography, Grow, Grid, Container } from "@material-ui/core";
+import React, { useState, useEffect } from "react"
+import { AppBar, Typography, Grow, Grid, Container } from "@material-ui/core"
 
-import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux"
 
-import {getPosts} from './actions/posts';
-import Form from "./components/Form/Form";
-import Posts from "./components/Posts/Posts";
+import { getPosts } from "./actions/posts"
+import Form from "./components/Form/Form"
+import Posts from "./components/Posts/Posts"
 
-import memories from "./images/memories.png";
-import useStyles from "./styles";
+import memories from "./images/memories.png"
+import useStyles from "./styles"
 
 const App = () => {
   const [currentId, setCurrentId] = useState(null)
-  const classes = useStyles();
+  const classes = useStyles()
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(getPosts())
-  }, [dispatch])
+  }, [currentId, dispatch])
 
   return (
-    <Container maxwidth="lg">
-      <AppBar className={classes.appBar} position="static" color="inherit">
-        <Typography className={classes.heading} variant="h2" align="center">
+    <Container maxwidth='lg'>
+      <AppBar className={classes.appBar} position='static' color='inherit'>
+        <Typography className={classes.heading} variant='h2' align='center'>
           Memories
         </Typography>
-        <img className={classes.image} src={memories} alt="mem" height="60" />
+        <img className={classes.image} src={memories} alt='mem' height='60' />
       </AppBar>
       <Grow in>
         <Container>
           <Grid
             container
-            justify="space-between"
-            alignItems="stretch"
-            spacing={3}
-          >
+            justify='space-between'
+            alignItems='stretch'
+            spacing={3}>
             <Grid item xs={12} sm={7}>
-              <Posts setCurrentId = {setCurrentId}/>
+              <Posts setCurrentId={setCurrentId} />
             </Grid>
             <Grid item xs={12} sm={4}>
-              <Form currentId = {currentId} setCurrentId = {setCurrentId} />
+              <Form currentId={currentId} setCurrentId={setCurrentId} />
             </Grid>
           </Grid>
         </Container>
       </Grow>
     </Container>
-  );
-};
+  )
+}
 
-export default App;
+export default App
