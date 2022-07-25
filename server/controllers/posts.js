@@ -57,6 +57,10 @@ export const deletePost = async (req, res) => {
 export const likePost = async (req, res) => {
   const { id } = req.params
 
+  // 'req.userId' is created in auth middleware and is used to determine 
+  // if the user has the rights to like the post
+  if(!req.userId) return res.status(404).send("User unauthenticated")
+
   if (!mongoose.Types.ObjectId.isValid(id))
     res.status(404).send("No post with that ID")
 
