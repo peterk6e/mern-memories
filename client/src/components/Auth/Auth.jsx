@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { useDispatch } from "react-redux"
+import { useNavigate } from "react-router-dom"
 import {
   Avatar,
   Button,
@@ -19,6 +20,7 @@ import Input from "./Input"
 const Auth = () => {
   const classes = useStyles()
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const [showPassword, setShowPassword] = useState(false)
   const [isSignup, setIsSignup] = useState(false)
@@ -45,10 +47,12 @@ const Auth = () => {
   }
 
   const googleSuccess = async res => {
-    const decoded = jwt_decode(res.credential)
+    const result = jwt_decode(res?.credential)
+    const token = result?.sub
 
     try {
-      //   dispatch({ type: "AUTH", data: { result, token } })
+      dispatch({ type: "AUTH", data: { result, token } })
+      navigate('/')
     } catch (error) {
       console.log(error)
     }
