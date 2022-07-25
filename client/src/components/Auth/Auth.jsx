@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
+import { signUp, signIn } from '../../actions/auth'
 import {
   Avatar,
   Button,
@@ -12,10 +13,18 @@ import {
 import jwt_decode from "jwt-decode"
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined"
 
-import { GoogleLogin, googleLogout } from "@react-oauth/google"
+import { GoogleLogin } from "@react-oauth/google"
 
 import useStyles from "./styles"
 import Input from "./Input"
+
+const initialState = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+}
 
 const Auth = () => {
   const classes = useStyles()
@@ -24,17 +33,22 @@ const Auth = () => {
 
   const [showPassword, setShowPassword] = useState(false)
   const [isSignup, setIsSignup] = useState(false)
+  const [formData, setFormData] = useState(initialState)
 
   const handleSubmit = e => {
     e.preventDefault()
-    // dispatch ?
+
+    if(isSignup) {
+      dispatch(signUp(formData, navigate))
+    }else{
+      dispatch(signIn(formData, navigate))
+    }
   }
 
-  const handleChange = () => {
-    // e.target.name === "firstName" ?
-    //setFirstName(e.target.value)
-    // :
-    //setlastName(e.target.value)
+  const handleChange = e => {
+    const name = e.target.name
+    const value = e.target.value
+    setFormData({...formData, [name] : value})
   }
 
   const handleShowPassword = () => {
@@ -52,7 +66,7 @@ const Auth = () => {
 
     try {
       dispatch({ type: "AUTH", data: { result, token } })
-      navigate('/')
+      navigate("/")
     } catch (error) {
       console.log(error)
     }
@@ -74,7 +88,7 @@ const Auth = () => {
               <>
                 <Input
                   handleChange={handleChange}
-                  name=''
+                  name='firstname'
                   label='Firstname'
                   half
                   autoFocus
