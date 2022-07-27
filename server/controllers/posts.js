@@ -13,7 +13,7 @@ export const getPosts = async (req, res) => {
 
 export const createPost = async (req, res) => {
   const post = req.body
-  const newPost = new PostMessage(post)
+  const newPost = new PostMessage({...post, creator: req.userId, createdAt: new Date().toISOString()})
 
   try {
     await newPost.save()
@@ -57,20 +57,29 @@ export const deletePost = async (req, res) => {
 export const likePost = async (req, res) => {
   const { id } = req.params
 
-  // 'req.userId' is created in auth middleware and is used to determine 
+  // 'req.userId' is created in auth middleware and is used to determine
   // if the user has the rights to like the post
-  if(!req.userId) return res.status(404).send("User unauthenticated")
+  if (!req.userId) return res.json({ message: "User unauthenticated" })
 
   if (!mongoose.Types.ObjectId.isValid(id))
     res.status(404).send("No post with that ID")
 
   try {
     const post = await PostMessage.findById(id)
+
+    const index = post.likes.findIndex(id => id === String(req.userId))
+
+    if (index === -1) {
+      post.likes.push(req.userId)
+    } else {
+      post.likes = post.likes.filter(id => id !== String(req.userId))
+    }
+
     const updatedPost = await PostMessage.findByIdAndUpdate(
       id,
-      { likeCount: post.likeCount + 1 },
+      post,
       { new: true }
-      )
+    )
     res.json(updatedPost)
   } catch (error) {
     console.log(error)
