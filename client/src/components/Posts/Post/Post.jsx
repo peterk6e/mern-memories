@@ -20,7 +20,7 @@ const Post = ({ post, setCurrentId }) => {
   const dispatch = useDispatch()
   const user = JSON.parse(localStorage.getItem("profile"))
 
-  console.log(user)
+  console.log("user", user)
   const Likes = () => {
     const numberOfLikes = post.likes.length
 

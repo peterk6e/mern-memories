@@ -5,6 +5,7 @@ import {
   CREATE,
   LIKE,
   DELETE,
+  FETCH_BY_SEARCH,
 } from "./../constants/actionTypes"
 
 // Actions Creators
@@ -54,6 +55,16 @@ export const likePost = id => async dispatch => {
     const { data } = await api.likePost(id)
 
     dispatch({ type: LIKE, payload: data })
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const getPostsBySearch = searchQuery => async dispatch => {
+  try {
+    const { data } = await api.fetchPostsbySearch(searchQuery)
+
+    dispatch({ type: FETCH_BY_SEARCH, payload: data })
   } catch (error) {
     console.log(error)
   }
