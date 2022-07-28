@@ -16,7 +16,7 @@ import Form from "../Form/Form"
 import Posts from "../Posts/Posts"
 import Paginate from "../Pagination/Pagination"
 
-import { getPosts } from "../../actions/posts"
+import { getPosts, getPostsBySearch } from "../../actions/posts"
 import useStyles from "./styles"
 
 function useQuery() {
@@ -39,13 +39,15 @@ const Home = () => {
   }, [currentId, dispatch])
 
   const searchPost = () => {
-    if(search.trim()) {
-      // dispatch => fetch search post
+    if (search.trim() || tags) {
+      dispatch(getPostsBySearch({
+        search, tags: tags.join(",") // can not send array through URL so we convert tags array to a string
+      }))
     } else {
-      navigate('/')
+      navigate("/")
     }
   }
-  
+
   const handleKeyDown = e => {
     if (e.keyCode === 13) {
       searchPost()
@@ -93,7 +95,13 @@ const Home = () => {
                 label='Search Tags'
                 variant='outlined'
               />
-              <Button onClick={searchPost} className={classes.searchButton} variant="contained" color="primary">Search</Button>
+              <Button
+                onClick={searchPost}
+                className={classes.searchButton}
+                variant='contained'
+                color='primary'>
+                Search
+              </Button>
             </AppBar>
             <Form currentId={currentId} setCurrentId={setCurrentId} />
             <Paper elevation={6}>
