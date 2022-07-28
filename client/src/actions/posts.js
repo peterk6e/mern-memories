@@ -10,15 +10,17 @@ import {
 
 // Actions Creators
 // use redux thunk
-export const getPosts = () => async dispatch => {
-  try {
-    const { data } = await api.fetchPosts()
+export const getPosts =
+  (page) =>
+  async dispatch => {
+    try {
+      const { data } = await api.fetchPosts(page)
 
-    dispatch({ type: FETCH_ALL, payload: data })
-  } catch (error) {
-    console.log(error)
+      dispatch({ type: FETCH_ALL, payload: data })
+    } catch (error) {
+      console.log(error)
+    }
   }
-}
 
 export const createPost = post => async dispatch => {
   try {

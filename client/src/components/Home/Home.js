@@ -14,7 +14,7 @@ import ChipInput from "material-ui-chip-input"
 
 import Form from "../Form/Form"
 import Posts from "../Posts/Posts"
-import Paginate from "../Pagination/Pagination"
+import Pagination from "../Pagination/Pagination"
 
 import { getPosts, getPostsBySearch } from "../../actions/posts"
 import useStyles from "./styles"
@@ -111,7 +111,7 @@ const Home = () => {
             </AppBar>
             <Form currentId={currentId} setCurrentId={setCurrentId} />
             <Paper elevation={6}>
-              <Paginate />
+              <Pagination page={Number(page)}/>
             </Paper>
           </Grid>
         </Grid>
