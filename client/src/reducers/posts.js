@@ -5,9 +5,11 @@ import {
   LIKE,
   DELETE,
   FETCH_BY_SEARCH,
+  START_LOADING,
+  END_LOADING,
 } from "./../constants/actionTypes"
 
-export default (state = [], action) => {
+export default (state = { isLoading: true, posts: [] }, action) => {
   switch (action.type) {
     case FETCH_ALL:
       return {
@@ -33,6 +35,10 @@ export default (state = [], action) => {
         ...state,
         posts: state.posts.filter(post => post._id !== action.payload),
       }
+    case START_LOADING:
+      return { ...state, isLoading: true }
+    case END_LOADING:
+      return { ...state, isLoading: false }
     default:
       return state
   }
