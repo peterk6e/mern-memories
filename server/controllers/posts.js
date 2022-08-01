@@ -18,13 +18,25 @@ export const getPosts = async (req, res) => {
       .limit(LIMIT)
       .skip(startIndex)
 
-    return res
-      .status(200)
-      .json({
-        data: posts,
-        currentPage: Number(page),
-        numberOfPages: Math.ceil(total / LIMIT),
-      })
+    return res.status(200).json({
+      data: posts,
+      currentPage: Number(page),
+      numberOfPages: Math.ceil(total / LIMIT),
+    })
+  } catch (error) {
+    res.status(404).json({ message: error })
+  }
+}
+
+export const getPost = async (req, res) => {
+  const { id } = req.params
+
+  try {
+    const post = await PostMessage.findById(id)
+
+    return res.status(200).json({
+      data: post,
+    })
   } catch (error) {
     res.status(404).json({ message: error })
   }
