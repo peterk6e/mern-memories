@@ -1,4 +1,4 @@
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles"
 
 export default makeStyles({
   media: {
@@ -17,7 +17,7 @@ export default makeStyles({
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
-    borderRadius: "25px",
+    borderRadius: "15px",
     height: "100%",
     position: "relative",
   },
@@ -49,4 +49,8 @@ export default makeStyles({
     display: "flex",
     justifyContent: "space-between",
   },
-});
+  cardAction: {
+    display: "block",
+    textAlign: "initial",
+  },
+})
