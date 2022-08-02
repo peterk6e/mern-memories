@@ -83,7 +83,7 @@ const PostDetails = () => {
           />
         </div>
       </div>
-      {recommendedPosts.length && (
+      {/* {recommendedPosts.length && (
         <div className={classes.section}>
           <Typography gutterBottom variant='h5'>
             You might also like:
@@ -113,7 +113,7 @@ const PostDetails = () => {
             <img src={selectedFile} width='200px' />
           </div>
         </div>
-      )}
+      )} */}
     </Paper>
   )
 }
