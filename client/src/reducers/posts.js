@@ -24,7 +24,7 @@ export default (state = { isLoading: true, posts: [] }, action) => {
     case FETCH_BY_SEARCH:
       return { ...state, posts: action.payload.data }
     case FETCH_POST:
-      return { ...state, posts: action.payload.data }
+      return { ...state, post: action.payload.post };
     case UPDATE:
     case LIKE: // both cases are the same
       return {

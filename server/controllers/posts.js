@@ -34,9 +34,7 @@ export const getPost = async (req, res) => {
   try {
     const post = await PostMessage.findById(id)
 
-    return res.status(200).json({
-      data: post,
-    })
+    res.status(200).json(post) // return
   } catch (error) {
     res.status(404).json({ message: error })
   }
@@ -129,7 +127,7 @@ export const getPostsBySearch = async (req, res) => {
       $or: [{ title }, { tags: { $in: tags.split(",") } }],
     })
 
-    res.json({ data: posts })
+    return res.json({ data: posts })
   } catch (error) {
     res.status(404).json({ message: error.message })
   }
