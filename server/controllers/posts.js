@@ -132,3 +132,28 @@ export const getPostsBySearch = async (req, res) => {
     res.status(404).json({ message: error.message })
   }
 }
+
+export const commentPost = async (req, res) => {
+  const { id } = req.params
+  const { value } = req.body
+
+  // 'req.userId' is created in auth middleware and is used to determine
+  // if the user has the rights to like the post
+  if (!req.userId) return res.json({ message: "User unauthenticated" })
+
+  if (!mongoose.Types.ObjectId.isValid(id))
+    res.status(404).send("No post with that ID")
+
+  try {
+    const post = await PostMessage.findById(id)
+
+    post.comments.push(value)
+
+    const updatedPost = await PostMessage.findByIdAndUpdate(id, post, {
+      new: true,
+    })
+    res.json(updatedPost)
+  } catch (error) {
+    console.log(error)
+  }
+}
