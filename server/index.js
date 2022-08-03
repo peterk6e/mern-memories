@@ -2,7 +2,7 @@ import express from "express"
 import bodyParser from "body-parser"
 import mongoose from "mongoose"
 import cors from "cors"
-import dotenv from 'dotenv'
+import dotenv from "dotenv"
 import postRoutes from "./routes/posts.js"
 import userRoutes from "./routes/users.js"
 
@@ -15,6 +15,10 @@ app.use(cors({ origin: "http://localhost:3000" }))
 
 app.use("/posts", postRoutes) // prefix 'posts'
 app.use("/user", userRoutes)
+app.get("/", (req, res) => {
+  res.send("app is running...")
+})
+
 const PORT = process.env.PORT || 5000
 
 mongoose
