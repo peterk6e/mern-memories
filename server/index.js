@@ -15,9 +15,6 @@ app.use(cors({ origin: "http://localhost:3000" }))
 
 app.use("/posts", postRoutes) // prefix 'posts'
 app.use("/user", userRoutes)
-app.get("/", (req, res) => {
-  res.send("app is running...")
-})
 
 const PORT = process.env.PORT || 5000
 
