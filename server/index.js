@@ -16,6 +16,10 @@ app.use(cors())
 app.use("/posts", postRoutes) // prefix 'posts'
 app.use("/user", userRoutes)
 
+app.get("/", (req, res) => {
+  res.send("app is running ...")
+})
+
 const PORT = process.env.PORT || 5000
 
 mongoose
