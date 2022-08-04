@@ -12,6 +12,7 @@ import {
   ButtonBase,
 } from "@material-ui/core"
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt"
+import ThumbUpAltOutlined from "@material-ui/icons/ThumbUpAltOutlined"
 import DeleteIcon from "@material-ui/icons/Delete"
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz"
 import moment from "moment"
@@ -36,19 +37,19 @@ const Post = ({ post, setCurrentId }) => {
           <ThumbUpAltIcon fontSize='small' /> &nbsp;
           {numberOfLikes > 2
             ? `You and ${numberOfLikes - 1} others`
-            : `${numberOfLikes} like${numberOfLikes > 1 ? "s" : ""} `}
+            : `${numberOfLikes} Like${numberOfLikes > 1 ? "s" : ""} `}
         </>
       ) : (
         <>
           <ThumbUpAltIcon fontSize='small' /> &nbsp;{numberOfLikes}{" "}
-          {numberOfLikes === 1 ? "like" : "likes"}
+          {numberOfLikes === 1 ? "Like" : "Likes"}
         </>
       )
     }
 
     return (
       <>
-        <ThumbUpAltIcon fontSize='small' /> &nbsp;Like
+        <ThumbUpAltOutlined fontSize='small' /> &nbsp;Like
       </>
     )
   }
@@ -109,7 +110,7 @@ const Post = ({ post, setCurrentId }) => {
           (user?.result?._id === post?.creator && (
             <Button
               size='small'
-              color='primary'
+              color='secondary'
               onClick={() => dispatch(deletePost(post._id))}>
               <DeleteIcon fontSize='small' />
               Delete

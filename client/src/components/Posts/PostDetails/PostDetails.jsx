@@ -13,27 +13,25 @@ const PostDetails = () => {
 
   console.log("POST", post)
   console.log("POSTS", posts)
-  
+
   const { id } = useParams()
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const classes = useStyles()
-  
+
   useEffect(() => {
     dispatch(getPost(id))
   }, [id])
-  
+
   useEffect(() => {
     if (post) {
       dispatch(getPostsBySearch({ search: "none", tags: post?.tags.join(",") }))
     }
   }, [post])
 
-  const recommendedPosts = posts.filter(({ _id }) => post._id !== _id)
-
   const openPost = _id => navigate(`/posts/${_id}`)
 
-  if (!post) return "No message found"//null
+  if (!post) return null
 
   if (isLoading) {
     return (
@@ -42,6 +40,8 @@ const PostDetails = () => {
       </Paper>
     )
   }
+
+  const recommendedPosts = posts.filter(({ _id }) => _id !== post._id)
 
   return (
     <Paper style={{ padding: "20px", borderRadius: "15px" }} elevation={6}>
@@ -83,37 +83,38 @@ const PostDetails = () => {
           />
         </div>
       </div>
-      {/* {recommendedPosts.length && (
+      {!!recommendedPosts.length && (
         <div className={classes.section}>
           <Typography gutterBottom variant='h5'>
             You might also like:
           </Typography>
           <Divider />
           <div className={classes.recommendedPosts}>
-            {recommendedPosts?.map(
-              ({ title, message, name, likes, selectedFile, _id }) => (
+            {recommendedPosts.map(
+              ({ title, name, message, likes, selectedFile, _id }) => (
                 <div
-                  style={{ margin: "20px", cursor: "pointer" }}
+                  style={{ margin: "20px", cursor: "pointer", flex: 1 }}
                   onClick={() => openPost(_id)}
-                  key={_id}></div>
+                  key={_id}>
+                  <Typography gutterBottom variant='h6'>
+                    {title}
+                  </Typography>
+                  <Typography gutterBottom variant='subtitle2'>
+                    {name}
+                  </Typography>
+                  <img src={selectedFile} width='200px' />
+                  <Typography gutterBottom variant='subtitle2'>
+                    {message}
+                  </Typography>
+                  <Typography gutterBottom variant='subtitle1'>
+                    Likes: {likes.length}
+                  </Typography>
+                </div>
               )
             )}
-            <Typography gutterBottom variant='h6'>
-              {title}
-            </Typography>
-            <Typography gutterBottom variant='subtitle2'>
-              {name}
-            </Typography>
-            <Typography gutterBottom variant='subtitle2'>
-              {message}
-            </Typography>
-            <Typography gutterBottom variant='subtitle1'>
-              Likes: {likes.length}
-            </Typography>
-            <img src={selectedFile} width='200px' />
           </div>
         </div>
-      )} */}
+      )}
     </Paper>
   )
 }
