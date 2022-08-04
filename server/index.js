@@ -11,7 +11,7 @@ dotenv.config()
 
 app.use(bodyParser.json({ limits: "30mb", extended: true }))
 app.use(bodyParser.urlencoded({ limits: "30mb", extended: true }))
-app.use(cors({ origin: "http://localhost:3000" }))
+app.use(cors())
 
 app.use("/posts", postRoutes) // prefix 'posts'
 app.use("/user", userRoutes)
