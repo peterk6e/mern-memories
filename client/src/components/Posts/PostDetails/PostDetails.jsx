@@ -11,9 +11,6 @@ import useStyles from "./styles"
 const PostDetails = () => {
   const { post, posts, isLoading } = useSelector(state => state.posts)
 
-  console.log("POST", post)
-  console.log("POSTS", posts)
-
   const { id } = useParams()
   const navigate = useNavigate()
   const dispatch = useDispatch()
