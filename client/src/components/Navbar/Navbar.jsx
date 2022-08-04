@@ -59,7 +59,6 @@ const Navbar = () => {
               src={user.result.imageUrl}>
               {user.result.name.charAt(0)}
             </Avatar>
-
             <Typography className={classes.userName} variant='h6'>
               {user.result.name}
             </Typography>
@@ -75,7 +74,7 @@ const Navbar = () => {
           <Button
             component={Link}
             to='/auth'
-            varaint='contained'
+            variant='contained'
             color='primary'>
             Sign in
           </Button>
