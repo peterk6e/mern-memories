@@ -88,7 +88,7 @@ const Auth = () => {
               <>
                 <Input
                   handleChange={handleChange}
-                  name='firstname'
+                  name='firstName'
                   label='Firstname'
                   half
                   autoFocus
