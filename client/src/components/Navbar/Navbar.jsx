@@ -15,15 +15,13 @@ const Navbar = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")))
 
   useEffect(() => {
-    const token = user?.token
-
-    if (token) {
-      const decodedToken = decode(token)
-
-      if (decodedToken.exp * 1000 < new Date().getTime()) logout()
-    }
-
     setUser(JSON.parse(localStorage.getItem("profile")))
+    // Handle token Expiration (not working with google auth)
+    // const token = user?.token
+    // if (token) {
+    //   const decodedToken = decode(token)
+    //   if (decodedToken.exp * 1000 < new Date().getTime()) logout()
+    //  }
   }, [location])
 
   const logout = () => {
