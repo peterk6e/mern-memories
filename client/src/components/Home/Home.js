@@ -105,7 +105,9 @@ const Home = () => {
                 onClick={searchPost}
                 className={classes.searchButton}
                 variant='contained'
-                color='primary'>
+                color='primary'
+                disabled={!(tags.length > 0) && !search}
+                >
                 Search
               </Button>
             </AppBar>

@@ -76,6 +76,7 @@ const Form = ({ currentId, setCurrentId }) => {
           fullWidth
           value={postData.title}
           onChange={e => setPostData({ ...postData, title: e.target.value })}
+          required
         />
         <TextField
           name='message'
@@ -84,6 +85,7 @@ const Form = ({ currentId, setCurrentId }) => {
           fullWidth
           value={postData.message}
           onChange={e => setPostData({ ...postData, message: e.target.value })}
+          required
         />
         <TextField
           name='tags'
@@ -101,7 +103,8 @@ const Form = ({ currentId, setCurrentId }) => {
             multiple={false}
             onDone={({ base64 }) =>
               setPostData({ ...postData, selectedFile: base64 })
-            }></FileBase>
+            }
+            required></FileBase>
         </div>
         <Button
           className={classes.buttonSubmit}
@@ -109,6 +112,7 @@ const Form = ({ currentId, setCurrentId }) => {
           color='primary'
           size='large'
           type='submit'
+          disabled={!postData.title || !postData.message}
           fullWidth>
           Submit
         </Button>
