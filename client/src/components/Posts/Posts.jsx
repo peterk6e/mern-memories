@@ -5,12 +5,24 @@ import Post from "./Post/Post"
 import { useSelector } from "react-redux"
 
 import useStyles from "./styles"
+import { Link } from "react-router-dom"
 
 const Posts = ({ setCurrentId }) => {
   const { posts, isLoading } = useSelector(state => state.posts)
   const classes = useStyles()
 
-  if(!posts.length && !isLoading) return 'No posts found'
+  if (!posts.length && !isLoading) {
+    return (
+      <div className={classes.actionDiv}>
+        <h2>Sorry, no posts match your criteria</h2>
+        <Link
+          to='/'
+          align='center'>
+          Show all posts
+        </Link>
+      </div>
+    )
+  }
 
   return isLoading ? (
     <CircularProgress />
