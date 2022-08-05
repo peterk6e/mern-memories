@@ -94,24 +94,24 @@ const Post = ({ post, setCurrentId }) => {
           <Likes />
         </Button>
         {user?.result?.sub === post?.creator ||
-          (user?.result?._id === post?.creator && (
-            <>
-              <Button
-                color='primary'
-                size='small'
-                onClick={() => {
-                  setCurrentId(post._id)
-                }}>
-                <MoreHorizIcon fontSize='small' />
-              </Button>
-              <Button
-                size='small'
-                color='primary'
-                onClick={() => dispatch(deletePost(post._id))}>
-                <DeleteIcon fontSize='small' />
-              </Button>
-            </>
-          ))}
+        user?.result?._id === post?.creator ? (
+          <>
+            <Button
+              color='primary'
+              size='small'
+              onClick={() => {
+                setCurrentId(post._id)
+              }}>
+              <MoreHorizIcon fontSize='small' />
+            </Button>
+            <Button
+              size='small'
+              color='primary'
+              onClick={() => dispatch(deletePost(post._id))}>
+              <DeleteIcon fontSize='small' />
+            </Button>
+          </>
+        ) : null}
       </CardActions>
     </Card>
   )
