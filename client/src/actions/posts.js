@@ -1,4 +1,6 @@
 import * as api from "../api"
+import { toast } from "react-hot-toast";
+
 import {
   FETCH_ALL,
   FETCH_POST,
@@ -59,6 +61,8 @@ export const createPost = (post, navigate) => async dispatch => {
   try {
     const { data } = await api.createPost(post)
 
+    toast.success('Post successfully create!')
+
     dispatch({ type: CREATE, payload: data })
     navigate(`/posts/${data._id}`)
   } catch (error) {
@@ -70,6 +74,8 @@ export const updatePost = (id, post) => async dispatch => {
   try {
     const { data } = await api.updatePost(id, post)
 
+    toast.success('Post successfully updated!')
+
     dispatch({ type: UPDATE, payload: data })
   } catch (error) {
     console.log(error)
@@ -79,6 +85,8 @@ export const updatePost = (id, post) => async dispatch => {
 export const deletePost = id => async dispatch => {
   try {
     await api.deletePost(id)
+
+    toast.success('Post deleted!')
 
     dispatch({ type: DELETE, payload: id })
   } catch (error) {
@@ -101,6 +109,10 @@ export const commentPost = (value, id) => async dispatch => {
     const { data } = await api.comment(value, id)
 
     dispatch({ type: COMMENT, payload: data })
+
+    toast('Comment added', {
+      icon: '👏',
+    });
 
     return data.comments;
   } catch (error) {

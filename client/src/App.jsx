@@ -2,6 +2,7 @@ import React from "react"
 import { Container } from "@material-ui/core"
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom"
 import { GoogleOAuthProvider } from "@react-oauth/google"
+import { Toaster } from "react-hot-toast";
 
 import Navbar from "./components/Navbar/Navbar"
 import Home from "./components/Home/Home"
@@ -15,6 +16,7 @@ const App = () => {
     <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
       <BrowserRouter>
         <Container maxwidth='xl'>
+          <Toaster />
           <Navbar />
           <Routes>
             <Route path='/' element={<Navigate to='/posts' />} />
